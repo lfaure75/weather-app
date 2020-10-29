@@ -1,0 +1,45 @@
+@import "../../static/style/var";
+
+.weatherOfDay {
+  width: 23.5rem;
+  height: 50.5rem;
+  background-color: $blue-dark;
+  background-image: url(../../static/images/Cloud-background.png);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 3rem;
+  background-blend-mode: soft-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__spinner {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  &__img {
+    height: min-content;
+    width: min-content;
+    margin-top: 8rem;
+  }
+
+  &__temp {
+    margin: 2.5rem 0 0;
+    color: $white-grey;
+    font-size: 9rem;
+    font-weight: 500;
+  }
+
+  &__temp-symbol {
+    color: $grey;
+    font-size: 3rem;
+  }
+
+  &__conditions {
+    margin: 1.43rem 0 0;
+    color: $grey;
+    font-size: 2.25rem;
+  }
+}
