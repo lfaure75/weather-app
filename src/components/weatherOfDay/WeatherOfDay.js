@@ -40,7 +40,10 @@ const WeatherOfDay = () => {
 	return (
 		<article className='weatherOfDay'>
 			{isLoading && (
-				<div className='weatherOfDay__spinner'>
+				<div
+					className='weatherOfDay__spinner'
+					data-testid='weatherOfDay__spinner'
+				>
 					<Loader type='Circles' color='#00BFFF' height={80} width={80} />
 				</div>
 			)}
@@ -48,7 +51,7 @@ const WeatherOfDay = () => {
 				<>
 					<img
 						src={weatherState[weather_state_abbr].img}
-						alt='weatherState.weather_state_abbr.name'
+						alt={weatherState[weather_state_abbr].name}
 						className='weatherOfDay__img'
 					/>
 					<p className='weatherOfDay__temp'>
