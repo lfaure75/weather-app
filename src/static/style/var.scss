@@ -1,3 +1,12 @@
+$base-font-size: 16;
+
 $blue-dark: #1e213a;
 $grey: #a09fb1;
 $white-grey: #e7e7eb;
+$dark-gray: #616475;
+$blue: #3c47e9;
+$clear: #6e707a;
+
+@function px-to-rem($px) {
+	@return ($px / $base-font-size) + rem;
+}

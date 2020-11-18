@@ -47,7 +47,7 @@ This application/site was created as a submission to a [DevChallenges](https://d
 [Challenge](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv): Create a weather app using an API. Use Front-end libraries like React or Vue. Don’t look at the existing solution. Fulfill user stories below:<br />
 
 User story: I can see city weather as default, preferably my current location - Implemented<br />
-User story: I can search for city<br />
+User story: I can search for city - implemented<br />
 User story: I can see weather of today and the next 5 days<br />
 User story: I can see the date and location of the weather<br />
 User story: I can see according to image for each type of weather<br />

@@ -1,0 +1,86 @@
+@import '../../static/style/var';
+
+.searchForPlaces {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	padding-right: px-to-rem(13);
+	padding-left: px-to-rem(12);
+	margin-bottom: px-to-rem(10);
+
+	&__close {
+		width: 100%;
+		margin-top: px-to-rem(18);
+		text-align: end;
+	}
+
+	&__close-button {
+		background-image: url(../../static/images/icons/sharp_close_white_18dp_small.png);
+		background-color: inherit;
+		height: px-to-rem(18);
+		width: px-to-rem(18);
+	}
+
+	&__form {
+		display: flex;
+		justify-content: space-between;
+		margin-top: px-to-rem(29);
+	}
+
+	&__input {
+		height: px-to-rem(46);
+		min-width: px-to-rem(252);
+		background-color: inherit;
+		border-style: solid;
+		border-width: px-to-rem(1);
+		border-color: $white-grey;
+		color: $dark-gray;
+		padding-left: px-to-rem(40);
+
+		background-image: url(../../static/images/icons/search-black-18dp.svg);
+		background-repeat: no-repeat;
+		background-position-y: center;
+		background-position-x: px-to-rem(15);
+	}
+
+	&__submit {
+		width: px-to-rem(86);
+		height: px-to-rem(46);
+		background-color: $blue;
+		color: $white-grey;
+		border-style: none;
+		font-weight: 600;
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		overflow-y: auto;
+
+		padding-right: px-to-rem(13);
+		padding-left: px-to-rem(12);
+		padding-bottom: px-to-rem(2);
+	}
+
+	&__city {
+		margin-top: px-to-rem(38);
+		min-height: px-to-rem(64);
+
+		background-color: inherit;
+		color: $white-grey;
+		text-align: left;
+		padding-left: px-to-rem(12);
+
+		&:hover {
+			border-style: solid;
+			border-width: px-to-rem(1);
+			border-color: $dark-gray;
+			padding-left: px-to-rem(11);
+			background-image: url(../../static/images/icons/keyboard_arrow_right-black-18dp.svg);
+			background-repeat: no-repeat;
+			background-position-y: center;
+			background-position-x: right;
+			cursor: url(../../static/images/icons/click.svg), auto;
+		}
+	}
+}

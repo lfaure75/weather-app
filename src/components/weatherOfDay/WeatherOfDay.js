@@ -14,9 +14,12 @@ import { useQuery } from 'react-query'
 import Loader from 'react-loader-spinner'
 
 import './WeatherOfDay.scss'
-import { getWeatherFromParis } from '../../services/WeatherService'
+import { getWeatherByLocationId } from '../../services/WeatherService'
 
-const WeatherOfDay = () => {
+const WeatherOfDay = ({
+	locationId = 615702,
+	onSearchForPlacesClick = () => {},
+}) => {
 	const weatherState = {
 		c: { img: clear, name: 'Clear' },
 		lc: { img: lightCloud, name: 'Light Cloud' },
@@ -31,14 +34,30 @@ const WeatherOfDay = () => {
 	}
 
 	const { isLoading, isError, data } = useQuery(
-		'weatherOfDay',
-		getWeatherFromParis
+		['weatherOfDay', locationId],
+		getWeatherByLocationId,
+		{
+			refetchOnWindowFocus: false,
+		}
 	)
 	const { weather_state_abbr, the_temp } =
 		(data && data.consolidated_weather && data.consolidated_weather[0]) || {}
 
+	const handleSearchForPlacesClick = () => {
+		onSearchForPlacesClick()
+	}
+
 	return (
 		<article className='weatherOfDay'>
+			<div className='weatherOfDay__searchForPlaces'>
+				<button
+					className='weatherOfDay__searchForPlaces-button'
+					aria-label='searchForPlaces'
+					onClick={handleSearchForPlacesClick}
+				>
+					Search for places
+				</button>
+			</div>
 			{isLoading && (
 				<div
 					className='weatherOfDay__spinner'
