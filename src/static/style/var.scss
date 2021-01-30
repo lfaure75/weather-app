@@ -1,6 +1,7 @@
 $base-font-size: 16;
 
 $blue-dark: #1e213a;
+$blue-night: #100e1d;
 $grey: #a09fb1;
 $white-grey: #e7e7eb;
 $dark-gray: #616475;
@@ -9,4 +10,13 @@ $clear: #6e707a;
 
 @function px-to-rem($px) {
 	@return ($px / $base-font-size) + rem;
+}
+
+$screen-md-min: px-to-rem(1440);
+
+// Medium devices
+@mixin md {
+	@media (min-width: #{$screen-md-min}) {
+		@content;
+	}
 }

@@ -38,6 +38,7 @@ describe('SearchForCity component', () => {
 		fireEvent.click(getByDisplayValue('Search'))
 
 		expect(await findByText('London')).toBeVisible()
+		expect(await findByText('Barcelona')).toBeVisible()
 
 		searchLocationByName.mockClear()
 	})

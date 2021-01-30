@@ -48,10 +48,10 @@ This application/site was created as a submission to a [DevChallenges](https://d
 
 User story: I can see city weather as default, preferably my current location - Implemented<br />
 User story: I can search for city - implemented<br />
-User story: I can see weather of today and the next 5 days<br />
+User story: I can see weather of today and the next 5 days - Implemented<br />
 User story: I can see the date and location of the weather<br />
 User story: I can see according to image for each type of weather<br />
-User story: I can see the min and max degree each day<br />
+User story: I can see the min and max degree each day - Implemented<br />
 User story: I can see wind status and wind direction<br />
 User story: I can see humidity percentage<br />
 User story: I can see visibility indicator<br />

@@ -1,109 +1,75 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { useQuery } from 'react-query'
+import { render } from '@testing-library/react'
 import App from './App'
 
-jest.mock('react-query')
+import { getWeatherByLocationId } from './services/WeatherService'
 
-const parisConsolidatedWeather = {
-	consolidated_weather: [
-		{
-			weather_state_name: 'Light Cloud',
-			weather_state_abbr: 'lc',
-			the_temp: 10.335,
-		},
-	],
-}
-
-const londonConsolidatedWeather = {
-	consolidated_weather: [
-		{
-			weather_state_name: 'Thunderstorm',
-			weather_state_abbr: 't',
-			the_temp: 10.335,
-		},
-	],
-}
-
-const londonLocationSearch = [
-	{
-		title: 'London',
-		location_type: 'City',
-		woeid: 44418,
-		latt_long: '51.506321,-0.12714',
-	},
-	{
-		title: 'Barcelona',
-		location_type: 'City',
-		woeid: 753692,
-		latt_long: '41.385578,2.168740',
-	},
-	{
-		title: 'Long Beach',
-		location_type: 'City',
-		woeid: 2441472,
-		latt_long: '33.766720,-118.192398',
-	},
-]
+jest.mock('./services/WeatherService')
 
 describe('wea&therApp component', () => {
-	afterEach(() => {
-		useQuery.mockClear()
-	})
-
-	it('should display the weather of Paris by default', async () => {
-		useQuery.mockReturnValue({
-			isLoading: false,
-			data: parisConsolidatedWeather,
+	it('should display the weather of the day and for the next days', async () => {
+		getWeatherByLocationId.mockReturnValue({
+			consolidated_weather: [
+				{
+					id: 5841788863512576,
+					weather_state_name: 'Heavy Rain',
+					weather_state_abbr: 'hr',
+					wind_direction_compass: 'SW',
+					created: '2021-01-30T12:40:05.737466Z',
+					applicable_date: '2021-01-30',
+					min_temp: 7.529999999999999,
+					max_temp: 12.32,
+					the_temp: 12.575,
+					wind_speed: 7.173781474492961,
+					wind_direction: 230.93291693080803,
+					air_pressure: 995.0,
+					humidity: 79,
+					visibility: 11.634243517855722,
+					predictability: 77,
+				},
+				{
+					id: 4888552212004864,
+					weather_state_name: 'Light Rain',
+					weather_state_abbr: 'lr',
+					wind_direction_compass: 'ESE',
+					created: '2021-01-30T12:40:09.484286Z',
+					applicable_date: '2021-01-31',
+					min_temp: 3.965,
+					max_temp: 9.385000000000002,
+					the_temp: 7.295,
+					wind_speed: 3.5791185974124446,
+					wind_direction: 110.23119557990097,
+					air_pressure: 1000.0,
+					humidity: 83,
+					visibility: 9.891608009226118,
+					predictability: 75,
+				},
+				{
+					id: 5863240748761088,
+					weather_state_name: 'Heavy Rain',
+					weather_state_abbr: 'hr',
+					wind_direction_compass: 'W',
+					created: '2021-01-30T12:40:11.888871Z',
+					applicable_date: '2021-02-01',
+					min_temp: 7.395,
+					max_temp: 10.455,
+					the_temp: 9.415,
+					wind_speed: 4.86613742353721,
+					wind_direction: 266.8727321124308,
+					air_pressure: 996.5,
+					humidity: 91,
+					visibility: 7.225614908931838,
+					predictability: 77,
+				},
+			],
 		})
+
 		const { findByText } = render(<App />)
 
-		expect(await findByText('Light Cloud')).toBeVisible()
-	})
+		expect(await findByText('Heavy Rain')).toBeVisible()
+		expect(await findByText('Sun, 31 Jan')).toBeVisible()
+		expect(await findByText('Mon, 1 Feb')).toBeVisible()
 
-	it('should display the weather of the city selected', async () => {
-		useQuery.mockImplementation((queryKey) => {
-			if (queryKey[0] === 'weatherOfDay' && queryKey[1] === 615702) {
-				return {
-					isLoading: false,
-					data: parisConsolidatedWeather,
-				}
-			} else if (queryKey[0] === 'weatherOfDay' && queryKey[1] === 44418) {
-				return {
-					isLoading: false,
-					data: londonConsolidatedWeather,
-				}
-			} else if (queryKey[0] === 'searchLocation' && queryKey[1] === 'lon') {
-				return {
-					isLoading: false,
-					data: londonLocationSearch,
-				}
-			} else if (queryKey[0] === 'searchLocation' && queryKey[1] === '') {
-				return {
-					isLoading: false,
-					data: [],
-				}
-			}
-		})
-		const {
-			getByText,
-			findByPlaceholderText,
-			getByDisplayValue,
-			findByText,
-		} = render(<App />)
-
-		fireEvent.click(getByText('Search for places'))
-
-		fireEvent.change(await findByPlaceholderText('search location'), {
-			target: { value: 'lon' },
-		})
-
-		fireEvent.click(getByDisplayValue('Search'))
-
-		expect(await findByText('London')).toBeVisible()
-
-		fireEvent.click(await findByText('London'))
-
-		expect(await findByText('Thunderstorm')).toBeVisible()
+		getWeatherByLocationId.mockClear()
 	})
 })

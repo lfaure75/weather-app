@@ -3,7 +3,8 @@
 .weatherApp {
 	display: flex;
 	flex-direction: column;
-	width: 23.5rem;
-	height: 50.5rem;
-	background-color: $blue-dark;
+
+	@include md {
+		flex-direction: row;
+	}
 }

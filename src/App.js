@@ -1,41 +1,40 @@
 import React, { useState } from 'react'
-import WeatherOfDay from './components/weatherOfDay/WeatherOfDay'
-import SearchForCity from './components/searchForCity/SearchForCity'
 import './App.scss'
+import { useQuery } from 'react-query'
+import { getWeatherByLocationId } from './services/WeatherService'
+import WeatherDetail from './components/WeatherDetail/WeatherDetail'
+import Weather from './components/Weather/Weather'
 
 function App() {
-	const [searchForPlaces, setSearchForPlaces] = useState(false)
 	const [locationId, setLocationId] = useState(615702)
 
-	const handleSearchForPlacesClick = () => {
-		setSearchForPlaces(true)
-	}
-
-	const handleCloseSearchCityClick = () => {
-		setSearchForPlaces(false)
-	}
+	const { isLoading, isError, data } = useQuery(
+		['weatherOfDay', locationId],
+		getWeatherByLocationId,
+		{
+			refetchOnWindowFocus: false,
+		}
+	)
+	const todayWeather = data?.consolidated_weather[0]
+	const weatherOfTheWeek = data?.consolidated_weather.slice(1)
 
 	const handleCityClick = (cityId) => {
 		setLocationId(cityId)
-		setSearchForPlaces(false)
 	}
 
 	return (
-		<main>
-			<section className='weatherApp'>
-				{searchForPlaces && (
-					<SearchForCity
-						onCloseClick={handleCloseSearchCityClick}
-						onCityClick={handleCityClick}
-					/>
-				)}
-				{!searchForPlaces && (
-					<WeatherOfDay
-						locationId={locationId}
-						onSearchForPlacesClick={handleSearchForPlacesClick}
-					/>
-				)}
-			</section>
+		<main className='weatherApp'>
+			<Weather
+				isLoading={isLoading}
+				isError={isError}
+				todayWeather={todayWeather}
+				onCityClick={handleCityClick}
+			/>
+			<WeatherDetail
+				isLoading={isLoading}
+				isError={isError}
+				weatherOfTheWeek={weatherOfTheWeek}
+			/>
 		</main>
 	)
 }

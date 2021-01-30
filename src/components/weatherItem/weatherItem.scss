@@ -1,0 +1,38 @@
+@import '../../static/style/var';
+
+.weatherItem {
+	width: px-to-rem(120);
+	height: px-to-rem(170);
+	background-color: $blue-dark;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-right: px-to-rem(26);
+	margin-bottom: px-to-rem(32);
+
+	&__date {
+		margin-top: px-to-rem(18);
+		color: $white-grey;
+	}
+
+	&__image {
+		margin-top: px-to-rem(10);
+		height: 52px;
+	}
+
+	&__temps {
+		display: flex;
+		width: 100%;
+		justify-content: space-around;
+		margin-top: px-to-rem(31);
+	}
+
+	&__temp-min {
+		color: $white-grey;
+	}
+
+	&__temp-max {
+		color: $grey;
+	}
+}
